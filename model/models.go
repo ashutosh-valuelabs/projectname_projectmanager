@@ -1,12 +1,12 @@
 package model
 
 type Overview struct {
-	GrandTotal        int64 `json:"grand_total"`
-	ClosedInTime      int64 `json:"closed_in-time"`
-	ClosedOutTime     int64 `json:"closed_out-time"`
-	InProgressInTime  int64 `json:"inprogress_in-time"`
-	InProgressOutTime int64 `json:"inprogress_out-time"`
-	OnHold            int64 `json:"onhold"`
+	GrandTotal        int64 `json:"Open"`
+	ClosedInTime      int64 `json:"Closed_In-Time"`
+	ClosedOutTime     int64 `json:"Closed_Out-Time"`
+	InProgressInTime  int64 `json:"Inprogress_In-Time"`
+	InProgressOutTime int64 `json:"Inprogress_Out-Time"`
+	OnHold            int64 `json:"Onhold"`
 }
 
 type Manager struct {
@@ -48,12 +48,12 @@ type Updates struct {
 	// Is_active      string `json:"is_active"`
 }
 type SayDoData struct {
-	Data []Saydo `json:"data,omitempty"`
+	Data []Saydo `json:"data"`
 }
 
 type Data struct {
-	Data []Manager `json:"data,omitempty"`
+	Data []Manager `json:"data"`
 }
 type UpdatesData struct {
-	UData []Updates `json:"data,omitempty"`
+	UData []Updates `json:"data"`
 }

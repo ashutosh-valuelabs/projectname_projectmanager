@@ -114,7 +114,7 @@ func (c *Commander) Getallheadcount(w http.ResponseWriter, r *http.Request) {
 			catch(err)
 			if stmt3.Next() == true {
 				stmt3.Scan(&deleteIDfromtable)
-				stmt4, err := db.Prepare("Update head_count set is_active = 0 where id = ?")
+				stmt4, err := db.Prepare("delete from head_count where id = ?")
 				catch(err)
 				_, err = stmt4.Exec(deleteIDfromtable)
 				catch(err)

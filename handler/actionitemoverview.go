@@ -109,6 +109,17 @@ func (C *Commander) ActionItemGetSayDo(writer http.ResponseWriter, response *htt
 		overviews = append(overviews, overview)
 		data.Data = overviews
 	}
+	if count.Next() == false {
+		count, err := db.Query("SELECT project_manager_name,count(project_manager_name) FROM action_items LEFT JOIN sub_project_manager ON action_items.sub_project_manager_id = sub_project_manager.id LEFT JOIN project_manager ON sub_project_manager.manager_id = project_manager.id LEFT JOIN sub_project ON sub_project_manager.sub_project_id = sub_project.id WHERE action_items.is_active = 1 GROUP BY project_manager_name ")
+		catch(err)
+		defer count.Close()
+		for count.Next() {
+			count.Scan(&overview.Name, &total)
+			overview.SayDo = 0
+			overviews = append(overviews, overview)
+		}
+		data.Data = overviews
+	}
 
 	writer.WriteHeader(http.StatusOK)
 	json.NewEncoder(writer).Encode(data)
@@ -165,8 +176,8 @@ func (C *Commander) ActionItemGetTrend(writer http.ResponseWriter, response *htt
 		Week := week[i]
 		SayDOTrend.Saydo = saydo
 		x, y := WeekRange(yr, Week)
-		x1 := x.Format("2006-01-02")
-		y1 := y.Format("2006-01-02")
+		x1 := x.Format("02-01-2006")
+		y1 := y.Format("02-01-2006")
 		SayDOTrend.WeekStart = x1
 		SayDOTrend.WeekEnd = y1
 		SayDoTrends = append(SayDoTrends, SayDOTrend)

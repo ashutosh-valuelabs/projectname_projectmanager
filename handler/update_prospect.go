@@ -107,7 +107,7 @@ func (C *Commander) UpdateProspectGetData(writer http.ResponseWriter, response *
 
 		for result.Next() {
 			var prospect models.Prospects
-			error := result.Scan(&prospect.ID, &prospect.Project, &prospect.Prospect, &prospect.Status, &prospect.Comments, &prospect.Challenges)
+			error := result.Scan(&prospect.ID, &prospect.Manager, &prospect.Project, &prospect.Prospect, &prospect.Status, &prospect.Comments, &prospect.Challenges)
 			catch(error)
 			prospects = append(prospects, prospect)
 		}

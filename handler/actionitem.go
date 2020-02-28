@@ -745,6 +745,7 @@ func (c *Commander) ActionItemGetDataID(w http.ResponseWriter, r *http.Request) 
 	var data []model.ActionItemClosed
 	var Page model.Pagination
 	var countt int
+	var key string
 	var error model.Error
 	SetupResponse(&w, r)
 	if (*r).Method == "OPTIONS" {
@@ -794,7 +795,13 @@ func (c *Commander) ActionItemGetDataID(w http.ResponseWriter, r *http.Request) 
 	p := mux.Vars(r)
 	removeWhiteSpace := p["id"]
 	removeWhiteSpace = strings.TrimSpace(removeWhiteSpace)
-	key := removeWhiteSpace + "%"
+	t, err := time.Parse("02-01-2006", removeWhiteSpace)
+	if err != nil {
+		key = removeWhiteSpace + "%"
+	} else {
+		timeKey := t.Format("2006-01-02")
+		key = timeKey + "%"
+	}
 	fmt.Println(key)
 	if strings.Contains(Role, "project manager") == true {
 		if status == "closed" {

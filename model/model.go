@@ -24,7 +24,7 @@ type Project struct {
 }
 
 type Position struct {
-	ProjectName    string `json:"projectname"`
+	ProjectName    string `json:"project_name"`
 	Between0to15   int    `json:"<_15_Days"`
 	Between15to30  int    `json:"15_to_30_Days"`
 	Between30to60  int    `json:"30_to_60_Days"`
@@ -44,7 +44,7 @@ type Daily struct {
 	Project_name      string `json:"project_name"`
 	Designation       string `json:"designation"`
 	Ageing            int    `json:"ageing"`
-	Type_position     string `json:"new_replacement_resignation"`
+	Type_position     string `json:"new_/_replacement_/_resignation"`
 	Position          string `json:"positions"`
 	Priority          string `json:"priority"`
 	Additonal_comment string `json:"additional_comments"`

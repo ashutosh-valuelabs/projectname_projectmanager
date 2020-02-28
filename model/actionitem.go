@@ -11,7 +11,7 @@ package model
 
 // ActionItemClosed : action item structure
 type ActionItemClosed struct {
-	ID          int    `json:"id,omitempty"`
+	ID          int    `json:"id"`
 	ProjectName string `json:"project_name,omitempty"`
 	ActionItem  string `json:"action_item,omitempty"`
 	Owner       string `json:"owner,omitempty"`

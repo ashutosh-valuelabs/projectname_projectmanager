@@ -9,7 +9,7 @@ type HeadCount struct {
 	VtCount        int    `json:"Value_Trials"`
 	PiICount       int    `json:"Project_Investment"`
 	Others         int    `json:"Others"`
-	Net            int    `json:"Net,omitempty"`
+	Net            int    `json:"Net"`
 	CreatedAt      string `json:"createdat,omitempty"`
 	UpdatedAt      string `json:"updatedat,omitempty"`
 	IsActive       int    `json:"is_active,omitempty"`

@@ -109,7 +109,8 @@ func (C *Commander) GetProjectName(writer http.ResponseWriter, request *http.Req
 		}
 	}()
 	if strings.Contains(Role, "program manager") == true {
-		GetProjectName, err := db.Query("SELECT  sub_project_name FROM sub_project WHERE project_id IN (SELECT id  FROM project WHERE program_manager_id in (SELECT id FROM program_manager WHERE program_manager_email = ?))", UserName)
+		fmt.Println(UserName)
+		GetProjectName, err := db.Query("SELECT  sub_project_name FROM sub_project WHERE is_active='1' and project_id IN (SELECT id  FROM project WHERE program_manager_id in (SELECT id FROM program_manager WHERE program_manager_email = ?))", UserName)
 		if err != nil {
 			WriteLogFile(err)
 			writer.WriteHeader(http.StatusBadRequest)
@@ -138,7 +139,7 @@ func (C *Commander) GetProjectName(writer http.ResponseWriter, request *http.Req
 		json.NewEncoder(writer).Encode(ProjectNames)
 	}
 	if strings.Contains(Role, "project manager") == true {
-		GetProjectName, err := db.Query("SELECT  sub_project.sub_project_name FROM sub_project_manager JOIN sub_project ON sub_project_manager.sub_project_id = sub_project.id Join project_manager ON sub_project_manager.manager_id = project_manager.id WHERE project_manager_email = ? ", UserName)
+		GetProjectName, err := db.Query("SELECT  sub_project.sub_project_name FROM sub_project_manager JOIN sub_project ON sub_project_manager.sub_project_id = sub_project.id Join project_manager ON sub_project_manager.manager_id = project_manager.id WHERE project_manager_email = ? and sub_project_manager.is_active='1' ", UserName)
 		if err != nil {
 			WriteLogFile(err)
 			writer.WriteHeader(http.StatusBadRequest)
